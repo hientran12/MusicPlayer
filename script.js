@@ -10,6 +10,9 @@ const img = document.querySelector('img');
 const audioElem = document.querySelector('audio');
 const progressContainer = document.getElementById('progress-container');
 const progressBar = document.getElementById('progress');
+const currentTimeElement = document.getElementById('current-time');
+const durationElement = document.getElementById('duration');
+
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const playBtn = document.getElementById('play');
@@ -55,7 +58,6 @@ function PlayBtnClick() {
 }
 
 
-
 // Update DOM
 function loadSong(song_id) {
     song = songs[song_id]
@@ -63,6 +65,8 @@ function loadSong(song_id) {
     artist.textContent = song.artist;
     audioElem.src = `music/${song.name}.mp3`;
     img.src = `img/${song.name}.jpg`;
+    currentTimeElement.innerHTML = '0:00';
+    durationElement.innerHTML = ''
 }
 
 function changeSong(isNext) {
@@ -97,12 +101,26 @@ function nextSong() {
 
 
 // update progressbar
-function updateProgressBar(e){
-    if(isPlaying){
-        const {duration, currentTime} = e.srcElement;
+function updateProgressBar(e) {
+    if (isPlaying) {
+        const { duration, currentTime } = e.srcElement;
         // Update progress bar width
         const progressPercent = (currentTime / duration) * 100;
         progressBar.style.width = `${progressPercent}%`;
+
+        // Calculate display for duration
+        const durationMinutes = Math.floor(duration / 60);
+        const durationSecond = Math.floor(duration % 60);
+        if (durationSecond) {
+            durationElement.textContent = (durationSecond < 10) ? `${durationMinutes}:0${durationSecond}` : `${durationMinutes}:${durationSecond}`;
+        }
+
+        // Calculate display for current TIme
+        const currentMinutes = Math.floor(currentTime / 60);
+        const currentSecond = Math.floor(currentTime % 60);
+        if (currentSecond) {
+            currentTimeElement.textContent = (currentSecond < 10) ? `${currentMinutes}:0${currentSecond}` : `${currentMinutes}:${currentSecond}`;
+        }
     }
 }
 
