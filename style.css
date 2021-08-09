@@ -22,28 +22,28 @@ body {
 }
 
 .player-container {
-  height: 500px;
-  width : 400px;
-  background: #e2e4e7;
+  height       : 500px;
+  width        : 400px;
+  background   : #e2e4e7;
   border-radius: 20px;
-  box-shadow: 0 15px 30px 5px rgba(0, 0, 0, 0.3);
+  box-shadow   : 0 15px 30px 5px rgba(0, 0, 0, 0.3);
 }
 
 
 .img-container {
-  height: 300px;
-  width: 300px;
+  height  : 300px;
+  width   : 300px;
   position: relative;
   top     : -50px;
   left    : 50px;
 }
 
 .img-container img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+  height       : 100%;
+  width        : 100%;
+  object-fit   : cover;
   border-radius: 20px;
-  box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
+  box-shadow   : 0 5px 30px 5px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
@@ -74,7 +74,7 @@ h3 {
   border-radius: 5px;
   height       : 100%;
   /* change this to show progress */
-  width        : 66%;
+  width        : 0%;
   transition   : width 0.1s linear;
 }
 
@@ -97,8 +97,8 @@ h3 {
   font-size   : 30px;
   color       : rgb(129, 129, 129);
   margin-right: 30px;
-  cursor: pointer;
-  user-select: none;
+  cursor      : pointer;
+  user-select : none;
 }
 
 .fas:hover {
