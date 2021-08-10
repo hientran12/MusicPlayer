@@ -66,7 +66,7 @@ function loadSong(song_id) {
     audioElem.src = `music/${song.name}.mp3`;
     img.src = `img/${song.name}.jpg`;
     currentTimeElement.innerHTML = '0:00';
-    durationElement.innerHTML = ''
+    durationElement.innerHTML = '0:00'
 }
 
 function changeSong(isNext) {
@@ -98,7 +98,16 @@ function nextSong() {
     PlayBtnClick();
 }
 
+function TimeToString(t){
+    let min = Math.floor(t / 60);
+    let sec = Math.floor(t % 60);
 
+    if (sec){
+        return (sec < 10)? `${min}:0${sec}` : `${min}:${sec}`;
+    }else{
+        return '0:00';
+    }
+}
 
 // update progressbar
 function updateProgressBar(e) {
@@ -107,25 +116,30 @@ function updateProgressBar(e) {
         // Update progress bar width
         const progressPercent = (currentTime / duration) * 100;
         progressBar.style.width = `${progressPercent}%`;
+        
 
-        // Calculate display for duration
-        const durationMinutes = Math.floor(duration / 60);
-        const durationSecond = Math.floor(duration % 60);
-        if (durationSecond) {
-            durationElement.textContent = (durationSecond < 10) ? `${durationMinutes}:0${durationSecond}` : `${durationMinutes}:${durationSecond}`;
-        }
-
-        // Calculate display for current TIme
-        const currentMinutes = Math.floor(currentTime / 60);
-        const currentSecond = Math.floor(currentTime % 60);
-        if (currentSecond) {
-            currentTimeElement.textContent = (currentSecond < 10) ? `${currentMinutes}:0${currentSecond}` : `${currentMinutes}:${currentSecond}`;
-        }
+        durationElement.textContent = TimeToString(duration);
+        currentTimeElement.textContent = TimeToString(currentTime);
     }
 }
 
+function setProgressbar(e){
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const {duration} = audioElem;
+    audioElem.currentTime = duration * clickX / width;
+}
+
+
+
 // Event Listeners
 audioElem.addEventListener('timeupdate', updateProgressBar);
+
+// Auto play next song
+audioElem.addEventListener('ended', nextSong)
+
+// Progessbar on Click
+progressContainer.addEventListener('click', setProgressbar);
 
 // Play Btn Click
 playBtn.addEventListener('click', PlayBtnClick);
@@ -133,5 +147,4 @@ prevBtn.addEventListener('click', nextSong);
 nextBtn.addEventListener('click', prevSong);
 
 // Onload Function
-loadSong(currentSong)
-
+loadSong(currentSong);
