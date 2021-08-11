@@ -5,3 +5,5 @@ Funktionalität:
 3. Dynamische Progressbar
 
 Klick [hier](https://hientran12.github.io/MusicPlayer/) um das Project zu führen.
+
+**Die Musik gehört zu Jacinto aus ZTM Academie.**
